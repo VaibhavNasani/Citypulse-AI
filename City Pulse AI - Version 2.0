@@ -1,0 +1,80 @@
+# City Pulse AI - Version 2.0
+# Features: city information, AI recommendations,
+# emergency alerts and smart city search
+
+cities = {
+    "Mumbai": {
+        "temperature": 29,
+        "air_quality": "Moderate",
+        "traffic": "Heavy",
+        "alert": "Heavy traffic reported in major areas"
+    },
+    "Delhi": {
+        "temperature": 32,
+        "air_quality": "Poor",
+        "traffic": "Heavy",
+        "alert": "High pollution levels reported"
+    },
+    "Bangalore": {
+        "temperature": 25,
+        "air_quality": "Good",
+        "traffic": "Moderate",
+        "alert": "No major alerts"
+    }
+}
+
+
+def get_city_info(city):
+    if city in cities:
+        data = cities[city]
+
+        print("\n--- City Pulse AI ---")
+        print("City:", city)
+        print("Temperature:", data["temperature"], "°C")
+        print("Air Quality:", data["air_quality"])
+        print("Traffic:", data["traffic"])
+
+        generate_recommendation(data)
+        show_alert(data)
+    else:
+        print("City information not available")
+
+
+def generate_recommendation(data):
+    print("\nAI Recommendation:")
+
+    if data["traffic"] == "Heavy":
+        print("- Avoid peak-hour travel.")
+
+    if data["air_quality"] == "Poor":
+        print("- Avoid unnecessary outdoor activities.")
+
+    if data["temperature"] > 30:
+        print("- Stay hydrated and avoid excessive heat.")
+
+    if (data["traffic"] != "Heavy"
+            and data["air_quality"] != "Poor"
+            and data["temperature"] <= 30):
+        print("- Conditions are suitable for normal activities.")
+
+
+def show_alert(data):
+    print("\nCity Alert:", data["alert"])
+
+
+def search_city(search_text):
+    print("\nSearch Results:")
+
+    found = False
+
+    for city in cities:
+        if search_text.lower() in city.lower():
+            print("-", city)
+            found = True
+
+    if not found:
+        print("No matching city found.")
+
+
+get_city_info("Mumbai")
+search_city("bang")
